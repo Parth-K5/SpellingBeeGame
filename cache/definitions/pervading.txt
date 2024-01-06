@@ -1,0 +1,1 @@
+spread or diffuse through

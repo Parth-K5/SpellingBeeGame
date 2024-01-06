@@ -1,0 +1,8 @@
+doctor 1 0
+sprocket 1 0
+Trinidadian 0 2
+hair 1 0
+Macedonia 1 0
+Shaanxi 0 10
+wafting 1 0
+frijoles 1 0
