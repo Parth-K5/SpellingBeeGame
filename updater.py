@@ -63,7 +63,7 @@ if __name__ == "__main__":
     updater = Updater()
 
     if updater.check_update():
-        print("New Update available.")
+        print(f"New Update available. v{updater.ID} -> v{updater.rawFutureID}")
         #updater.download(updater.futureID)
         #updater.run_update()
         #exit("Quitting")
