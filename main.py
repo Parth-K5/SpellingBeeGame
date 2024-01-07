@@ -20,6 +20,7 @@ os.chdir(PROJECT_PATH)
 updater = updater.Updater()
 
 if updater.check_update():
+    print("New Update Found")
     updater.download(updater.newestID)
     updater.run_update()
     exit("Applying Update")
