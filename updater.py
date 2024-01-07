@@ -3,7 +3,7 @@ from git import Repo
 from platform import system
 import os
 import sys
-
+import shutil
 
 class Updater:
     def __init__(self):
@@ -30,11 +30,13 @@ class Updater:
         if system() == "Darwin":
             download_dir = f"/Users/{os.environ['USER']}/Desktop/SBG-{versionID}"
             self.PACKAGED_PATH = download_dir
+        if os.path.exists(download_dir):
+            shutil.rmtree(download_dir)
         Repo.clone_from("https://github.com/parthk5/SpellingBeeGame", download_dir)
 
 
     def run_update(self):
-        os.system(f"python3 {self.PACKAGED_PATH}/update.py {self.LAUNCH_PATH}", shell=True)
+        os.system(f"python3 {self.PACKAGED_PATH}/update.py {self.LAUNCH_PATH}")
 
     def report_version(self):
         with open("version.txt", 'r') as verFile:

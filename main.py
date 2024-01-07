@@ -13,12 +13,14 @@ if platform.system() == "Darwin":
         if "SGB-Update" in file:
             shutil.rmtree(file)
 
+print("Cleaned old update files")
 os.chdir(PROJECT_PATH)
 
 
 updater = updater.Updater()
 
 if updater.check_update():
+    print("New Update Found")
     updater.download(updater.newestID)
     updater.run_update()
     exit("Applying Update")

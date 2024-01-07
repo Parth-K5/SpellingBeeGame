@@ -16,7 +16,7 @@ def install(installPath):
     if os.path.exists(installPath):
         shutil.rmtree(installPath, onerror=remove_readonly)
     
-    shutil.coptree(updatePATH, installPath)
+    shutil.copytree(updatePATH, installPath)
     exit("Update Applied")
 
 install(sys.argv[1])
