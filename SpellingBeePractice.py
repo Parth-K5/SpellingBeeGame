@@ -19,6 +19,7 @@ from lxml import etree
 import multiprocessing
 import concurrent.futures
 import shutil
+from updater import Updater
 
 class SpellingGame:
     def __init__(self, root, style, SFX_STYLE, learningCurve=None):
@@ -52,9 +53,7 @@ class SpellingGame:
         print(f"Objects in cache: {len(os.listdir("cache/definitions"))}")
         print(f"Cache size: {round(cache_size*0.00000095367432, 2)} MB")
 
-        with open('version.txt', 'r') as verFile:
-            currVer = verFile.read()
-        print(f"Running v{currVer}")
+        print(f"Running v{Updater().report_version()}")
 
 
         with open("wordList.txt", 'r') as wordFile:
