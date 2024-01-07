@@ -28,6 +28,7 @@ if updater.check_update():
     updater.run_update()
     os.chdir(PROJECT_PATH)
     updater.notify("Spelling Bee Game", f"Spelling Bee updated to v{updater.report_version()}. Please reopen it")
+    os._exit(0)
 else:
     print("No Update Available")
 
