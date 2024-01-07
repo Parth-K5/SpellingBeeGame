@@ -9,13 +9,13 @@ class Updater:
     def __init__(self):
         self.LAUNCH_PATH = os.getcwd()
         self.PACKAGED_PATH = None
-        self.newestID = self.report_version()
+        self.ID = self.report_version()
 
     def check_update(self):
         r = requests.get("https://raw.githubusercontent.com/parthk5/SpellingBeeGame/main/version.txt")
         latest = int(r.text.replace(".", ""))
 
-        self.newestID = latest
+        self.futureID = latest
 
         with open("version.txt", 'r') as verFile:
             currVer = int(verFile.read().replace(".", ""))
@@ -44,11 +44,20 @@ class Updater:
         with open("version.txt", 'r') as verFile:
             currVer = verFile.read()
         return currVer
+    
+
+    def notify(title, text):
+        os.system("""
+              osascript -e 'display notification "{}" with title "{}"'
+              """.format(text, title))
+
 
 if __name__ == "__main__":
     updater = Updater()
 
     if updater.check_update():
-        updater.download(updater.newestID)
+        updater.notify("Spelling Bee Game", f"Updating from {updater.ID} to {updater.futureID}")
+        updater.download(updater.futureID)
         updater.run_update()
-        exit("Applying Update")
+        updater.notify("Spelling Bee Game", f"Spelling Bee Game was updated to version {updater.report_version}. Please reopen the application")
+        exit("Quitting")
