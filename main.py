@@ -26,6 +26,7 @@ if updater.check_update():
     updater.download(updater.futureID)
     updater.notify("Spelling Bee Game", f"Updating game from {updater.ID} to {updater.futureID}")
     updater.run_update()
+    os.chdir(PROJECT_PATH)
     updater.notify("Spelling Bee Game", f"Spelling Bee updated to v{updater.report_version()}. Please reopen it")
 else:
     print("No Update Available")
