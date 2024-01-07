@@ -67,4 +67,4 @@ if __name__ == "__main__":
         #updater.run_update()
         #exit("Quitting")
     else:
-        print(f"No new update available. v{updater.report_version()} is the latest")
+        print(f"No new update available. Latest: v{updater.report_version()}")
