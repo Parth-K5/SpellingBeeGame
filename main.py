@@ -4,11 +4,16 @@ import shutil
 import platform
 import updater
 
-TEMP_UPDATE_PATH = f"/Users/{os.environ['USER']}/Desktop/SGB-Update"
+PROJECT_PATH = os.getcwd()
+
 
 if platform.system() == "Darwin":
-    if os.path.exists(TEMP_UPDATE_PATH):
-        shutil.rmtree(TEMP_UPDATE_PATH)
+    os.chdir(f"/Users/{os.environ['USER']}/Desktop")
+    for file in os.listdir():
+        if "SGB-Update" in file:
+            shutil.rmtree(file)
+
+os.chdir(PROJECT_PATH)
 
 
 updater = updater.Updater()
