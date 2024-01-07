@@ -13,6 +13,7 @@ if platform.system() == "Darwin":
         if "SGB-Update" in file:
             shutil.rmtree(file)
 
+print("Cleaned old update files")
 os.chdir(PROJECT_PATH)
 
 
