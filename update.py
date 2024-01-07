@@ -13,8 +13,8 @@ def install(installPath):
     updatePATH = os.getcwd().split("/")[-1]
     os.system("cd ..")
 
-    #if os.path.exists(installPath):
-        #shutil.rmtree(installPath, onerror=remove_readonly)
+    if os.path.exists(installPath):
+        shutil.rmtree(installPath, onerror=remove_readonly)
     
     shutil.copytree(updatePATH, installPath, symlinks=True)
     exit("Update Applied")

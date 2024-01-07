@@ -10,7 +10,7 @@ PROJECT_PATH = os.getcwd()
 if platform.system() == "Darwin":
     os.chdir(f"/Users/{os.environ['USER']}/Desktop")
     for file in os.listdir():
-        if "SGB-Update" in file:
+        if "SBG-" in file:
             shutil.rmtree(file)
 
 print("Cleaned old update files")
