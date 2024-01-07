@@ -4,7 +4,7 @@ from platform import system
 import os
 import sys
 import shutil
-
+from time import sleep, perf_counter
 class Updater:
     def __init__(self):
         self.LAUNCH_PATH = os.getcwd()
@@ -46,7 +46,7 @@ class Updater:
         return currVer
     
 
-    def notify(title, text):
+    def notify(self, title, text):
         os.system("""
               osascript -e 'display notification "{}" with title "{}"'
               """.format(text, title))
@@ -56,8 +56,17 @@ if __name__ == "__main__":
     updater = Updater()
 
     if updater.check_update():
+        startUpdate = perf_counter()
+
         updater.notify("Spelling Bee Game", f"Updating from {updater.ID} to {updater.futureID}")
+        sleep(3)
+
         updater.download(updater.futureID)
         updater.run_update()
-        updater.notify("Spelling Bee Game", f"Spelling Bee Game was updated to version {updater.report_version}. Please reopen the application")
+
+        elapsedTime = perf_counter - startUpdate
+
+        updater.notify("Spelling Bee Game", f"Spelling Bee Game was updated to version {updater.report_version} (Elapsed: {elapsedTime}). Please reopen the application")
+        sleep(2)
+
         exit("Quitting")
