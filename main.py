@@ -23,7 +23,7 @@ updater = updater.Updater()
 
 if updater.check_update():
     print("New Update Found")
-    updater.download(updater.newestID)
+    updater.download(updater.futureID)
     updater.run_update()
     exit("Applying Update")
 else:
