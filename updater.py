@@ -5,6 +5,8 @@ import os
 import sys
 import shutil
 from time import sleep, perf_counter
+from random import randint
+
 class Updater:
     def __init__(self):
         self.LAUNCH_PATH = os.getcwd()
@@ -12,10 +14,14 @@ class Updater:
         self.ID = self.report_version()
 
     def check_update(self):
-        r = requests.get("https://raw.githubusercontent.com/parthk5/SpellingBeeGame/main/version.txt")
+        cachedBypass = randint(1, 999999999999)
+        r = requests.get(f"https://raw.githubusercontent.com/parthk5/SpellingBeeGame/main/version.txt?{cachedBypass}")
+        self.rawFutureID = r.text
+        
         latest = int(r.text.replace(".", ""))
 
         self.futureID = latest
+
 
         with open("version.txt", 'r') as verFile:
             currVer = int(verFile.read().replace(".", ""))

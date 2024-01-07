@@ -23,7 +23,7 @@ updater = updater.Updater()
 
 if updater.check_update():
     print("New Update Found")
-    updater.notify("Spelling Bee Game", f"Updating game from {updater.ID} to {updater.futureID}")
+    updater.notify("Spelling Bee Game", f"Updating game from v{updater.ID} to v{updater.rawFutureID}")
     updater.download(updater.futureID)
     updater.run_update()
     os.chdir(PROJECT_PATH)
