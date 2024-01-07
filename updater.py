@@ -29,7 +29,8 @@ class Updater:
         #print(f"Latest: {latest}")
         #print(f"Current: {currVer}")
 
-        return latest > currVer
+        return self.ID == self.rawFutureID
+        
 
 
     def download(self, versionID):
