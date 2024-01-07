@@ -9,16 +9,14 @@ def remove_readonly(func, path, _):
     func(path)
 
 
-def install(installPath):
-    updatePATH = os.path.basename(os.getcwd())
-    os.chdir("..")
+def install(runFromPath, installPath):
 
     if os.path.exists(installPath):
         shutil.rmtree(installPath, onerror=remove_readonly)
 
     
     os.mkdir(installPath)
-    shutil.copytree(updatePATH, installPath, symlinks=True, dirs_exist_ok=True)
+    shutil.copytree(runFromPath, installPath, symlinks=True, dirs_exist_ok=True)
     exit("Update Applied")
 
-install(sys.argv[1])
+install(sys.argv[1], sys.argv[2])
