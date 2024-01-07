@@ -52,6 +52,11 @@ class SpellingGame:
         print(f"Objects in cache: {len(os.listdir("cache/definitions"))}")
         print(f"Cache size: {round(cache_size*0.00000095367432, 2)} MB")
 
+        with open('version.txt', 'r') as verFile:
+            currVer = verFile.read()
+        print(f"Running v{currVer}")
+
+
         with open("wordList.txt", 'r') as wordFile:
             wordlist = wordFile.readlines()
 
