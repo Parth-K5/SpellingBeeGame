@@ -11,9 +11,11 @@ if platform.system() == "Darwin":
     os.chdir(f"/Users/{os.environ['USER']}/Desktop")
     for file in os.listdir():
         if "SBG-" in file:
+            print("Found previous update files")
             shutil.rmtree(file)
+            print("Cleaned old update files")
 
-print("Cleaned old update files")
+
 os.chdir(PROJECT_PATH)
 
 
