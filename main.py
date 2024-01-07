@@ -24,10 +24,11 @@ updater = updater.Updater()
 if updater.check_update():
     print("New Update Found")
     updater.download(updater.futureID)
+    updater.notify("Spelling Bee Game", f"Updating game from {updater.ID} to {updater.futureID}")
     updater.run_update()
     exit("Applying Update")
 else:
-    print(f"Spelling Bee game is at the latest version: {updater.report_version()}")
+    print(f"Spelling Bee game is at the latest version: {updater.report_version()}. Please reopen it")
 
 
 controller = SpellingBeePractice.AdaptationCurve()

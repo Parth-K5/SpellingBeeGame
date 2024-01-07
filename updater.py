@@ -56,17 +56,6 @@ if __name__ == "__main__":
     updater = Updater()
 
     if updater.check_update():
-        startUpdate = perf_counter()
-
-        updater.notify("Spelling Bee Game", f"Updating from {updater.ID} to {updater.futureID}")
-        sleep(3)
-
         updater.download(updater.futureID)
         updater.run_update()
-
-        elapsedTime = perf_counter - startUpdate
-
-        updater.notify("Spelling Bee Game", f"Spelling Bee Game was updated to version {updater.report_version} (Elapsed: {elapsedTime}). Please reopen the application")
-        sleep(2)
-
         exit("Quitting")
