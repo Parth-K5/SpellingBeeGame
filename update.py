@@ -10,11 +10,12 @@ def remove_readonly(func, path, _):
 
 
 def install(installPath):
-    updatePATH = os.getcwd().split("/")[-1]
-    os.system("cd ..")
+    updatePATH = os.path.basename(os.getcwd())
+    os.chdir("..")
 
     if os.path.exists(installPath):
         shutil.rmtree(installPath, onerror=remove_readonly)
+
     
     os.mkdir(installPath)
     shutil.copytree(updatePATH, installPath, symlinks=True, dirs_exist_ok=True)
