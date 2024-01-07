@@ -29,7 +29,7 @@ class Updater:
         #print(f"Latest: {latest}")
         #print(f"Current: {currVer}")
 
-        return self.ID == self.rawFutureID
+        return self.ID != self.rawFutureID
         
 
 
