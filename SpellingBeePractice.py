@@ -39,6 +39,11 @@ class SpellingGame:
         self.internal_record = {'practiced': [], 'correct': [], 'incorrect': []}
         self.local_definitions = "cache/definitions/"
 
+        if os.path.exists("cache") == False:
+                os.mkdir("cache")
+        if os.path.exists("cache/definitions") == False:
+            os.mkdir("cache/definitions")
+
         with open("wordList.txt", 'r') as wordFile:
             wordlist = wordFile.readlines()
 
