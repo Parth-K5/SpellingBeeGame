@@ -44,6 +44,14 @@ class SpellingGame:
         if os.path.exists("cache/definitions") == False:
             os.mkdir("cache/definitions")
 
+        cache_size = 0
+
+        for item in os.scandir("cache/definitions"):
+            cache_size+=os.path.getsize(item)
+        
+        print(f"Objects in cache: {len(os.listdir("cache/definitions"))}")
+        print(f"Cache size: {round(cache_size*0.00000095367432, 2)} MB")
+
         with open("wordList.txt", 'r') as wordFile:
             wordlist = wordFile.readlines()
 
