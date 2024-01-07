@@ -1,40 +1,72 @@
-import SpellingBeePractice
+import requests
+from git import Repo
+from platform import system
 import os
+import sys
 import shutil
-import platform
-import updater
+from time import sleep, perf_counter
+class Updater:
+    def __init__(self):
+        self.LAUNCH_PATH = os.getcwd()
+        self.PACKAGED_PATH = None
+        self.ID = self.report_version()
 
-PROJECT_PATH = os.getcwd()
+    def check_update(self):
+        r = requests.get("https://raw.githubusercontent.com/parthk5/SpellingBeeGame/main/version.txt")
+        latest = int(r.text.replace(".", ""))
 
+        self.futureID = latest
 
-if platform.system() == "Darwin":
-    os.chdir(f"/Users/{os.environ['USER']}/Desktop")
-    for file in os.listdir():
-        if "SBG-" in file:
-            print("Found previous update files")
-            shutil.rmtree(file)
-            print("Cleaned old update files")
+        with open("version.txt", 'r') as verFile:
+            currVer = int(verFile.read().replace(".", ""))
 
+        #print(f"Latest: {latest}")
+        #print(f"Current: {currVer}")
 
-os.chdir(PROJECT_PATH)
-
-
-updater = updater.Updater()
-
-if updater.check_update():
-    print("New Update Found")
-    updater.download(updater.futureID)
-    updater.run_update()
-    exit("Applying Update")
-else:
-    print(f"Spelling Bee game is at the latest version: {updater.report_version()}")
+        return latest > currVer
 
 
-controller = SpellingBeePractice.AdaptationCurve()
-analyze = controller.extrapolate()
+    def download(self, versionID):
+        if system() == "Darwin":
+            download_dir = f"/Users/{os.environ['USER']}/Desktop/SBG-{versionID}"
+            self.PACKAGED_PATH = download_dir
+        if os.path.exists(download_dir):
+            shutil.rmtree(download_dir)
+        Repo.clone_from("https://github.com/parthk5/SpellingBeeGame", download_dir)
 
-if analyze == None:
-    controller.refresh_data()
 
-print(controller.extrapolate())
-controller.start()
+    def run_update(self):
+        print(f"Update function launchPath: {self.LAUNCH_PATH}")
+        print(f"Update function targetPath: {self.PACKAGED_PATH}")
+        os.system(f"python3 {self.PACKAGED_PATH}/update.py {self.PACKAGED_PATH} {self.LAUNCH_PATH}")
+
+    def report_version(self):
+        with open("version.txt", 'r') as verFile:
+            currVer = verFile.read()
+        return currVer
+    
+
+    def notify(title, text):
+        os.system("""
+              osascript -e 'display notification "{}" with title "{}"'
+              """.format(text, title))
+
+
+if __name__ == "__main__":
+    updater = Updater()
+
+    if updater.check_update():
+        startUpdate = perf_counter()
+
+        updater.notify("Spelling Bee Game", f"Updating from {updater.ID} to {updater.futureID}")
+        sleep(3)
+
+        updater.download(updater.futureID)
+        updater.run_update()
+
+        elapsedTime = perf_counter - startUpdate
+
+        updater.notify("Spelling Bee Game", f"Spelling Bee Game was updated to version {updater.report_version} (Elapsed: {elapsedTime}). Please reopen the application")
+        sleep(2)
+
+        exit("Quitting")
