@@ -494,9 +494,8 @@ class AdaptationCurve:
             app = SpellingGame(root, style, SFX_STYLE=SFX_STYLE)
             root.mainloop()
 
-
-if __name__ == "__main__":
     '''
+
     #os.chdir("/Users/anju/Documents/Projects/Python")
 
     if platform.system() != "Darwin":
@@ -520,6 +519,10 @@ if __name__ == "__main__":
     app = SpellingGame(root, style)
     root.mainloop()
     '''
+
+
+'''
+if __name__ == "__main__":
     controller = AdaptationCurve()
     analyze = controller.extrapolate()
 
@@ -528,3 +531,5 @@ if __name__ == "__main__":
 
     print(controller.extrapolate())
     controller.start()
+
+'''
