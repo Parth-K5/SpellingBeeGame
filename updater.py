@@ -7,6 +7,9 @@ import shutil
 from time import sleep, perf_counter
 from random import randint
 
+class UpdaterErrors(Exception):
+    pass
+
 class Updater:
     def __init__(self):
         self.LAUNCH_PATH = os.getcwd()
@@ -15,7 +18,12 @@ class Updater:
 
     def check_update(self):
         cachedBypass = randint(1, 999999999999)
-        r = requests.get(f"https://raw.githubusercontent.com/parthk5/SpellingBeeGame/main/version.txt?{cachedBypass}")
+        try:
+            r = requests.get(f"https://raw.githubusercontent.com/parthk5/SpellingBeeGame/main/version.txt?{cachedBypass}")
+        except:
+            self.notify("Spelling Bee Game", "No Internet. Please reconnect and try again")
+            raise UpdaterErrors("No Internet. Please reconnect to the internet and try again")
+            exit(0)
         self.rawFutureID = r.text
         
         latest = int(r.text.replace(".", ""))
