@@ -493,7 +493,7 @@ class AdaptationCurve:
         else:
             SFX_STYLE = "native"
         
-        SFX_STYLE = "native"
+        SFX_STYLE = "gTTS"
         if (SFX_STYLE == "gTTS"):
             pygame.mixer.init()
         print(f"Using {SFX_STYLE} tts")
