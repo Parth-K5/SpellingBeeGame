@@ -11,6 +11,8 @@ def remove_readonly(func, path, _):
 
 def install(runFromPath, installPath):
 
+    print(f"Copying from {runFromPath} --> {installPath}")
+
     if os.path.exists(installPath):
         shutil.rmtree(installPath, onerror=remove_readonly)
 
