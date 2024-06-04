@@ -53,7 +53,7 @@ class Updater:
     def run_update(self):
         print(f"Update function launchPath: {self.LAUNCH_PATH}")
         print(f"Update function targetPath: {self.PACKAGED_PATH}")
-        os.system(f"python3 {self.PACKAGED_PATH}/update.py {self.PACKAGED_PATH} {self.LAUNCH_PATH}")
+        os.system(f"python3 {self.PACKAGED_PATH}/update.py '{self.PACKAGED_PATH}' '{self.LAUNCH_PATH}'")
 
     def report_version(self):
         with open("version.txt", 'r') as verFile:
