@@ -19,6 +19,7 @@ def install(runFromPath, installPath):
     
     os.mkdir(installPath)
     shutil.copytree(runFromPath, installPath, symlinks=True, dirs_exist_ok=True)
+    shutil.rmtree(runFromPath)
     exit("Update Applied")
 
 install(sys.argv[1], sys.argv[2])
